@@ -54,10 +54,17 @@
                 return;
             }
 
-            // Save selection to local storage and navigate to the student record page
+            // Save selection to local storage
             localStorage.setItem('branch', branch);
             localStorage.setItem('division', division);
-            window.location.href = 'record.html'; // Redirect to the student record page
+
+            // Navigate to the student record page
+            const selectedPage = localStorage.getItem('selectedPage');
+            if (selectedPage) {
+                window.location.href = selectedPage; // Redirect to the selected page
+            } else {
+                window.location.href = 'record.html'; // Default to record.html
+            }
         }
     </script>
 </body>

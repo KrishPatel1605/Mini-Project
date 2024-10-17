@@ -11,10 +11,19 @@
         <h1>Student Management System</h1>
         <p>Where do you want to navigate?</p> <!-- Question added here -->
         <div class="button-container">
-            <button class="button" onclick="window.location.href='branch.html'">Record</button>
-            <button class="button" onclick="window.location.href='att.html'">Attendance</button>
-            <button class="button" onclick="window.location.href='fees.html'">Fees</button>
+            <button class="button" onclick="navigate('record.html')">Record</button>
+            <button class="button" onclick="navigate('att.html')">Attendance</button>
+            <button class="button" onclick="navigate('fees.html')">Fees</button>
         </div>
     </div>
+
+    <script>
+        function navigate(page) {
+            // Save the selected page to localStorage
+            localStorage.setItem('selectedPage', page);
+            // Navigate to branch.html
+            window.location.href = 'branch.html';
+        }
+    </script>
 </body>
 </html>
