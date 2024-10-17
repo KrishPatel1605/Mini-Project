@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record Management System</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Record Management System</h1>
+        <div id="branchDivisionDisplay">
+            <h2 id="branchDivisionTitle"></h2>
+        </div>
+        <div class="input-container">
+            <input type="text" placeholder="Name" id="name">
+            <input type="email" placeholder="Email" id="email">
+            <input type="text" placeholder="GPA" id="grade">
+            <input type="number" placeholder="Age" id="age">
+            <input type="text" placeholder="Degree" id="degree">
+        </div>
+
+        <button class="button" type="submit" id="submit" onclick="addStudent()">Add Student</button>
+        
+        <input class="search" type="text" id="search" onkeyup="search()" placeholder="Search By Name, Email or Degree">
+        
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>GPA</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+
+        <button class="button" id="download" onclick="downloadExcel()">Download Excel Sheet</button>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        // Display selected branch and division
+        const branch = localStorage.getItem('branch');
+        const division = localStorage.getItem('division');
+        const branchDivisionTitle = document.getElementById('branchDivisionTitle');
+
+        if (branch && division) {
+            branchDivisionTitle.innerText = `${branch}-${division}`;
+        } else {
+            branchDivisionTitle.innerText = 'No Branch and Division Selected';
+        }
+
+        function downloadExcel() {
+    const branch = localStorage.getItem('branch');
+    const division = localStorage.getItem('division');
+
+    if (!branch || !division) {
+        alert('Branch and Division must be selected to download the Excel sheet.');
+        return;
+    }
+
+    // Construct the filename based on branch and division
+    const fileName = `${branch}_${division}.xlsx`;
+
+    // Correctly access the file from /uploads in the public folder
+    fetch(`/uploads/${fileName}`)
+        .then(response => {
+            if (!response.ok) throw new Error('File not found');
+            return response.blob(); // Get the response as a blob
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+
+            // Append to body, trigger download, and clean up
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            alert('Error downloading file: ' + error.message);
+        });
+}
+
+    </script>
+</body>
+</html>

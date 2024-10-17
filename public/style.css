@@ -22,6 +22,12 @@ h1 {
     color: #444; /* Darker color for header */
 }
 
+p {
+    font-size: 1.2rem; /* Adjust font size as needed */
+    margin-bottom: 20px; /* Space between question and buttons */
+    color: #444; /* Match color with the heading */
+}
+
 /* Input Field Styling */
 .input-container input {
     background-color: #fff;
