@@ -1,0 +1,109 @@
+/* General Styles */
+body {
+    background-color: #f0f0f0;  /* Change to match the background from the image */
+    color: #333;  /* Text color as seen in the image */
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: white;  /* Container background */
+    border-radius: 15px;  /* Soft corners */
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Light shadow for elevation */
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #444; /* Darker color for header */
+}
+
+/* Input Field Styling */
+.input-container input {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 50px;
+    padding-left: 15px;
+    color: #444;
+    font-size: 1rem;
+}
+
+input::placeholder {
+    color: #aaa;  /* Placeholder color */
+}
+
+/* Buttons */
+.button {
+    background-color: #4CAF50;  /* Adjust button color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;  /* Hover effect for button */
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #f2f2f2;  /* Light background for table headers */
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;  /* Alternating row colors */
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Search Bar */
+.search {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Dropdown Styling */
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Edit/Delete Icons */
+button i {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+button i:hover {
+    color: #333;  /* Hover effect for action icons */
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Branch and Division</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Select Branch and Division</h1>
+        <div class="input-container">
+            <label for="branch">Branch</label>
+            <select id="branch" onchange="populateDivision()">
+                <option value="">--Select Branch--</option>
+                <option value="CS">CS</option>
+                <option value="IT">IT</option>
+                <option value="AIDS">AIDS</option>
+            </select>
+
+            <label for="division">Division</label>
+            <select id="division" disabled>
+                <option value="">--Select Division--</option>
+            </select>
+        </div>
+
+        <button class="button" onclick="goToStudentPage()">Proceed</button>
+    </div>
+
+    <script>
+        function populateDivision() {
+            const branch = document.getElementById('branch').value;
+            const division = document.getElementById('division');
+
+            // Enable the division dropdown
+            division.disabled = false;
+
+            // Clear previous options
+            division.innerHTML = '<option value="">--Select Division--</option>';
+
+            if (branch === 'CS' || branch === 'IT') {
+                division.innerHTML += '<option value="A">A</option><option value="B">B</option>';
+            } else if (branch === 'AIDS') {
+                division.innerHTML += '<option value="A">A</option>';
+            }
+        }
+
+        function goToStudentPage() {
+            const branch = document.getElementById('branch').value;
+            const division = document.getElementById('division').value;
+
+            if (!branch || !division) {
+                alert("Please select both branch and division.");
+                return;
+            }
+
+            // Save selection to local storage and navigate to the student record page
+            localStorage.setItem('branch', branch);
+            localStorage.setItem('division', division);
+            window.location.href = 'index.html'; // Redirect to the student record page
+        }
+    </script>
+</body>
+</html>
