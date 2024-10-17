@@ -23,23 +23,38 @@ window.onload = function() {
 };
 
 function addStudent() {
-    const nameValue = document.getElementById('name').value;
-    const emailValue = document.getElementById('email').value;
-    const ageValue = document.getElementById('age').value;
-    const gradeValue = document.getElementById('grade').value;
-    const degreeValue = document.getElementById('degree').value;
+    const idValue = document.getElementById('id').value.trim().toUpperCase(); // Convert ID to uppercase
+    const nameValue = document.getElementById('name').value.trim();
+    const emailValue = document.getElementById('email').value.trim();
+    const ageValue = document.getElementById('age').value.trim();
+    const gradeValue = document.getElementById('grade').value.trim();
+    const degreeValue = document.getElementById('degree').value.trim();
 
     if (document.querySelector("#submit").innerText === "Edit Student") {
         let index = students.findIndex(student => student.ID === global_id);
-        students[index] = { ID: global_id, name: nameValue, email: emailValue, age: ageValue, grade: gradeValue, degree: degreeValue };
+
+        // Allow ID to be updated
+        if (idValue !== global_id && students.some(student => student.ID === idValue)) {
+            alert("ID already exists. Please enter a unique ID.");
+            return;
+        }
+
+        // Update the student record
+        students[index] = { ID: idValue, name: nameValue, email: emailValue, age: ageValue, grade: gradeValue, degree: degreeValue };
         document.querySelector("#submit").innerHTML = "Add Student";
     } else {
         if (nameValue === '' || emailValue === '' || ageValue === '' || gradeValue === '' || degreeValue === "") {
             alert("All fields are required!");
             return;
         }
-        count++;
-        students.push({ ID: count, name: nameValue, email: emailValue, age: ageValue, grade: gradeValue, degree: degreeValue });
+
+        // Check for unique ID
+        if (students.some(student => student.ID === idValue)) {
+            alert("ID already exists. Please enter a unique ID.");
+            return;
+        }
+
+        students.push({ ID: idValue, name: nameValue, email: emailValue, age: ageValue, grade: gradeValue, degree: degreeValue });
     }
 
     clearInputs();
@@ -48,6 +63,7 @@ function addStudent() {
 }
 
 function clearInputs() {
+    document.getElementById('id').value = ""; // Clear ID input
     document.getElementById('name').value = "";
     document.getElementById('email').value = "";
     document.getElementById('age').value = "";
@@ -91,11 +107,16 @@ function deleteStudent(id) {
 function editStudent(id) {
     global_id = id;
     const student = students.find(student => student.ID === id);
+    
+    // Populate the fields with student data, including ID
+    document.getElementById("id").value = student.ID; // Populate ID field
     document.getElementById("name").value = student.name;
     document.getElementById("email").value = student.email;
     document.getElementById("age").value = student.age;
     document.getElementById("grade").value = student.grade;
     document.getElementById("degree").value = student.degree;
+
+    // Change button text to indicate editing mode
     document.querySelector("#submit").innerHTML = "Edit Student";
 }
 
